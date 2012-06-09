@@ -1,0 +1,29 @@
+#!/sbin/busybox sh
+_PATH="$PATH"
+PATH=/sbin
+
+busybox cd /
+busybox date >>boot.txt
+exec >>boot.txt 2>&1
+busybox rm init
+busybox mount -t proc proc /proc
+busybox mount -t sysfs sysfs /sys
+
+#load_image=/stage1/boot.cpio
+
+busybox mv xx init
+if busybox grep -q bootmode=2 /proc/cmdline ; then
+	# recovery boot
+	busybox rm init.smdk4210.rc init.smdk4210.usb init.goldfish.rc
+	busybox mv recovery.rc init.rc
+	exec /init
+fi
+
+#busybox cpio -i < ${load_image}
+
+busybox umount /sys
+busybox umount /proc
+busybox date >>boot.txt
+busybox rm -fr /etc /tmp /dev/* /recovery.rc
+export PATH="${_PATH}"
+exec /init
