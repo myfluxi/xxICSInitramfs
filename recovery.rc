@@ -20,6 +20,9 @@ on init
     mkdir /preload
     mount /tmp /tmp tmpfs
 
+on fs
+    mount ext4 /dev/block/mmcblk0p9 /system noatime wait
+
 on boot
 # Permissions for mDNIe
     chown system media_rw /sys/class/mdnie/mdnie/mode
