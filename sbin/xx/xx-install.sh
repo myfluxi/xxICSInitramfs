@@ -28,7 +28,7 @@ fi
 mount /system -o remount,ro
 
 
-# Set xxTweaker permissions
+#### Set xxTweaker permissions ####
 if [ ! -e /data ]; then mount /data -o remount,rw; fi
 
 if [ -e /data/data/net.fluxi.xxTweaker ]; then
@@ -43,6 +43,11 @@ if [ -e /data/data/net.fluxi.xxTweaker ]; then
 	chown -R $USERID:$USERID /data/data/net.fluxi.xxTweaker
 	chown 1000:1000 /data/data/net.fluxi.xxTweaker/lib
 fi
+
+
+#### (Re-)Create traces file to catch logcat warnings ####
+rm /data/anr/traces.txt
+touch /data/anr/traces.txt
 
 
 #### Create /clockworkmod/.salted_hash to satisfy CWMR ####
