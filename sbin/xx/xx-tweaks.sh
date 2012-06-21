@@ -70,9 +70,9 @@ echo "0" > /proc/sys/vm/swappiness			# 60
 #### Enable IDLE, AFTR, LPA ####
 # 0 = IDLE
 # 1 = AFTR
-# 2 = LPA
+# 2 = IDLE || LPA
 # 3 = AFTR || LPA
-echo "0" > /sys/module/cpuidle_exynos4/parameters/enable_mask
+echo "3" > /sys/module/cpuidle_exynos4/parameters/enable_mask
 
 #### Enable SCHED_MC multicore scheduler, requires AFTR ####
 # 0 = off (default)
