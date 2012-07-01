@@ -24,6 +24,15 @@ if [ ! -f /system/vendor/firmware/mfc_fw.bin ]; then
 fi
 
 
+#### Install ntfs-3g ####
+NTFS3G=$(which ntfs-3g)
+if [ "NTFS3G"=="" ]; then
+	cp -f $FILESDIR/ntfs/ntfs-3g system/xbin/ntfs-3g
+	chmod 755 /system/xbin/ntfs-3g
+	chown root:root /system/xbin/ntfs-3g
+fi
+
+
 #### Done with /system ####
 mount /system -o remount,ro
 
